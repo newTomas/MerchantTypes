@@ -13,13 +13,15 @@ export class Transaction {
 	value: string;
 	usd: number;
 	txid: string;
+	chain: number;
 
-	constructor(obj: (Transaction | TransactionBSON | TransactionExtended) & { [key: string]: any }) {
+	constructor(obj: (Transaction | TransactionBSON | TransactionExtended & { token: string, chain: number }) & { [key: string]: any }) {
 		this.userId = obj.userId.toString();
 		this.token = obj.token;
 		this.value = obj.value.toString();
 		this.usd = obj.usd;
 		this.txid = obj.txid;
+		this.chain = obj.chain;
 	}
 }
 
@@ -52,12 +54,14 @@ export class TransactionBSON {
 	value: Decimal128;
 	usd: number;
 	txid: string;
+	chain: number;
 
-	constructor(obj: (TransactionBSON | TransactionExtended) & { [key: string]: any }) {
+	constructor(obj: (TransactionBSON | (TransactionExtended & { chain: number, token: string })) & { [key: string]: any }) {
 		this.projectId = obj.projectId;
 		this.token = obj.token;
 		this.usd = obj.usd;
 		this.txid = obj.txid;
+		this.chain = obj.chain;
 
 		if (typeof obj.userId === "bigint") {
 			this.userId = new Decimal128(obj.userId.toString());
@@ -76,7 +80,7 @@ export class WalletBSON {
 	userId: Decimal128;
 	address: string;
 
-	constructor(obj: { userId: string | bigint, projectId: number, address: string } & { [key: string]: any }) {
+	constructor(obj: { userId: string | bigint | Decimal128, projectId: number, address: string } & { [key: string]: any }) {
 		this.projectId = obj.projectId;
 		this.address = obj.address;
 
