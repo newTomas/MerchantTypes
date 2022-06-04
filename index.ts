@@ -1,5 +1,5 @@
-import type { Decimal128 } from "bson";
-import type { Log as LogOrig } from "web3-core";
+import { Decimal128 } from "bson";
+import { Log as LogOrig } from "web3-core";
 
 export type Log = LogOrig & {
 	id: string;
