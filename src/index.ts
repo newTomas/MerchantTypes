@@ -30,7 +30,7 @@ export class TransactionExtended {
 	userId: bigint;
 	usd: number;
 	txid: string;
-	value: bigint;
+	value: string;
 	tokenId: number;
 	projectId: number;
 	isOur: boolean;
@@ -51,7 +51,7 @@ export class TransactionBSON {
 	projectId: number;
 	userId: Decimal128;
 	token: string;
-	value: Decimal128;
+	value: string;
 	usd: number;
 	txid: string;
 	chain: number;
@@ -68,9 +68,7 @@ export class TransactionBSON {
 		}
 		else this.userId = obj.userId;
 
-		if (typeof obj.value === "bigint") {
-			this.value = new Decimal128(obj.value.toString());
-		} else this.value = obj.value;
+		this.value = obj.value;
 	}
 }
 

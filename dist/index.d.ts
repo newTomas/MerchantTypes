@@ -22,7 +22,7 @@ export declare class TransactionExtended {
     userId: bigint;
     usd: number;
     txid: string;
-    value: bigint;
+    value: string;
     tokenId: number;
     projectId: number;
     isOur: boolean;
@@ -34,7 +34,7 @@ export declare class TransactionBSON {
     projectId: number;
     userId: Decimal128;
     token: string;
-    value: Decimal128;
+    value: string;
     usd: number;
     txid: string;
     chain: number;

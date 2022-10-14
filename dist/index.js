@@ -60,11 +60,7 @@ class TransactionBSON {
         }
         else
             this.userId = obj.userId;
-        if (typeof obj.value === "bigint") {
-            this.value = new bson_1.Decimal128(obj.value.toString());
-        }
-        else
-            this.value = obj.value;
+        this.value = obj.value;
     }
 }
 exports.TransactionBSON = TransactionBSON;
