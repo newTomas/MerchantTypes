@@ -8,6 +8,7 @@ export type Log = LogOrig & {
 
 //То что получает юзер
 export class Transaction {
+	id: number;
 	userId: string;
 	token: string;
 	value: string;
@@ -15,7 +16,8 @@ export class Transaction {
 	txid: string;
 	chain: number;
 
-	constructor(obj: (Transaction | TransactionBSON | TransactionExtended & { token: string, chain: number }) & { [key: string]: any }) {
+	constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & { token: string, chain: number }) & { [key: string]: any }) {
+		this.id = obj.id;
 		this.userId = obj.userId.toString();
 		this.token = obj.token;
 		this.value = obj.value.toString();
@@ -25,29 +27,36 @@ export class Transaction {
 	}
 }
 
-//То что передают между собой checker и main
-export class TransactionExtended {
+//То что эмитит платежка (перед отправкой на апишку)
+export class MerchantTransaction {
+	id: number;
 	userId: bigint;
 	usd: number;
 	txid: string;
 	value: string;
 	tokenId: number;
+	token: string;
 	projectId: number;
 	isOur: boolean;
+	blockNumber: number;
 
-	constructor(obj: TransactionExtended & { [key: string]: any }) {
+	constructor(obj: MerchantTransaction & { [key: string]: any }) {
+		this.id = obj.id;
 		this.projectId = obj.projectId;
 		this.userId = obj.userId;
 		this.usd = obj.usd;
 		this.txid = obj.txid;
 		this.value = obj.value;
 		this.tokenId = obj.tokenId;
+		this.token = obj.token;
 		this.isOur = obj.isOur;
+		this.blockNumber = obj.blockNumber;
 	}
 }
 
 //То что main отправляет апишке через кафку
 export class TransactionBSON {
+	id: number;
 	projectId: number;
 	userId: Decimal128;
 	token: string;
@@ -56,7 +65,8 @@ export class TransactionBSON {
 	txid: string;
 	chain: number;
 
-	constructor(obj: (TransactionBSON | (TransactionExtended & { chain: number, token: string })) & { [key: string]: any }) {
+	constructor(obj: (TransactionBSON | (MerchantTransaction & { chain: number })) & { [key: string]: any }) {
+		this.id = obj.id;
 		this.projectId = obj.projectId;
 		this.token = obj.token;
 		this.usd = obj.usd;

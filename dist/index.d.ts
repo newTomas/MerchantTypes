@@ -5,32 +5,37 @@ export declare type Log = LogOrig & {
     removed: boolean;
 };
 export declare class Transaction {
+    id: number;
     userId: string;
     token: string;
     value: string;
     usd: number;
     txid: string;
     chain: number;
-    constructor(obj: (Transaction | TransactionBSON | TransactionExtended & {
+    constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & {
         token: string;
         chain: number;
     }) & {
         [key: string]: any;
     });
 }
-export declare class TransactionExtended {
+export declare class MerchantTransaction {
+    id: number;
     userId: bigint;
     usd: number;
     txid: string;
     value: string;
     tokenId: number;
+    token: string;
     projectId: number;
     isOur: boolean;
-    constructor(obj: TransactionExtended & {
+    blockNumber: number;
+    constructor(obj: MerchantTransaction & {
         [key: string]: any;
     });
 }
 export declare class TransactionBSON {
+    id: number;
     projectId: number;
     userId: Decimal128;
     token: string;
@@ -38,9 +43,8 @@ export declare class TransactionBSON {
     usd: number;
     txid: string;
     chain: number;
-    constructor(obj: (TransactionBSON | (TransactionExtended & {
+    constructor(obj: (TransactionBSON | (MerchantTransaction & {
         chain: number;
-        token: string;
     })) & {
         [key: string]: any;
     });

@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WalletBSON = exports.TransactionBSON = exports.TransactionExtended = exports.Transaction = void 0;
+exports.WalletBSON = exports.TransactionBSON = exports.MerchantTransaction = exports.Transaction = void 0;
 const bson_1 = require("bson");
 //То что получает юзер
 class Transaction {
+    id;
     userId;
     token;
     value;
@@ -11,6 +12,7 @@ class Transaction {
     txid;
     chain;
     constructor(obj) {
+        this.id = obj.id;
         this.userId = obj.userId.toString();
         this.token = obj.token;
         this.value = obj.value.toString();
@@ -20,28 +22,35 @@ class Transaction {
     }
 }
 exports.Transaction = Transaction;
-//То что передают между собой checker и main
-class TransactionExtended {
+//То что эмитит платежка (перед отправкой на апишку)
+class MerchantTransaction {
+    id;
     userId;
     usd;
     txid;
     value;
     tokenId;
+    token;
     projectId;
     isOur;
+    blockNumber;
     constructor(obj) {
+        this.id = obj.id;
         this.projectId = obj.projectId;
         this.userId = obj.userId;
         this.usd = obj.usd;
         this.txid = obj.txid;
         this.value = obj.value;
         this.tokenId = obj.tokenId;
+        this.token = obj.token;
         this.isOur = obj.isOur;
+        this.blockNumber = obj.blockNumber;
     }
 }
-exports.TransactionExtended = TransactionExtended;
+exports.MerchantTransaction = MerchantTransaction;
 //То что main отправляет апишке через кафку
 class TransactionBSON {
+    id;
     projectId;
     userId;
     token;
@@ -50,6 +59,7 @@ class TransactionBSON {
     txid;
     chain;
     constructor(obj) {
+        this.id = obj.id;
         this.projectId = obj.projectId;
         this.token = obj.token;
         this.usd = obj.usd;
