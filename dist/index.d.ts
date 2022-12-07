@@ -1,6 +1,6 @@
 import { Decimal128 } from "bson";
 import { Log as LogOrig } from "web3-core";
-export declare type Log = LogOrig & {
+export type Log = LogOrig & {
     id: string;
     removed: boolean;
 };
