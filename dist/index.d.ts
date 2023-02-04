@@ -54,10 +54,10 @@ export declare class TransactionBSON {
 }
 export declare class WalletBSON {
     projectId: number;
-    walletId: Decimal128;
+    id: Decimal128;
     address: string;
     constructor(obj: {
-        walletId: string | bigint | Decimal128;
+        id: string | bigint | Decimal128;
         projectId: number;
         address: string;
     } & {

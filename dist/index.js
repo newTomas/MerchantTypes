@@ -83,16 +83,16 @@ exports.TransactionBSON = TransactionBSON;
 //То что main отправляет апишке через кафку
 class WalletBSON {
     projectId;
-    walletId;
+    id;
     address;
     constructor(obj) {
         this.projectId = obj.projectId;
         this.address = obj.address;
-        if (typeof obj.walletId === "bigint" || typeof obj.walletId === "string") {
-            this.walletId = new bson_1.Decimal128(obj.walletId.toString());
+        if (typeof obj.id === "bigint" || typeof obj.id === "string") {
+            this.id = new bson_1.Decimal128(obj.id.toString());
         }
         else
-            this.walletId = obj.walletId;
+            this.id = obj.id;
     }
 }
 exports.WalletBSON = WalletBSON;

@@ -91,16 +91,16 @@ export class TransactionBSON {
 //То что main отправляет апишке через кафку
 export class WalletBSON {
 	projectId: number;
-	walletId: Decimal128;
+	id: Decimal128;
 	address: string;
 
-	constructor(obj: { walletId: string | bigint | Decimal128, projectId: number, address: string } & { [key: string]: any }) {
+	constructor(obj: { id: string | bigint | Decimal128, projectId: number, address: string } & { [key: string]: any }) {
 		this.projectId = obj.projectId;
 		this.address = obj.address;
 
-		if (typeof obj.walletId === "bigint" || typeof obj.walletId === "string") {
-			this.walletId = new Decimal128(obj.walletId.toString());
+		if (typeof obj.id === "bigint" || typeof obj.id === "string") {
+			this.id = new Decimal128(obj.id.toString());
 		}
-		else this.walletId = obj.walletId;
+		else this.id = obj.id;
 	}
 }
