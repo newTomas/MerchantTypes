@@ -5,27 +5,29 @@ const bson_1 = require("bson");
 //То что получает юзер
 class Transaction {
     id;
-    userId;
+    walletId;
     token;
     value;
     usd;
     txid;
     chain;
+    timestamp;
     constructor(obj) {
         this.id = obj.id;
-        this.userId = obj.userId.toString();
+        this.walletId = obj.walletId.toString();
         this.token = obj.token;
         this.value = obj.value.toString();
         this.usd = obj.usd;
         this.txid = obj.txid;
         this.chain = obj.chain;
+        this.timestamp = obj.timestamp;
     }
 }
 exports.Transaction = Transaction;
 //То что эмитит платежка (перед отправкой на апишку)
 class MerchantTransaction {
     id;
-    userId;
+    walletId;
     usd;
     txid;
     value;
@@ -34,10 +36,11 @@ class MerchantTransaction {
     projectId;
     isOur;
     blockNumber;
+    timestamp;
     constructor(obj) {
         this.id = obj.id;
         this.projectId = obj.projectId;
-        this.userId = obj.userId;
+        this.walletId = obj.walletId;
         this.usd = obj.usd;
         this.txid = obj.txid;
         this.value = obj.value;
@@ -45,6 +48,7 @@ class MerchantTransaction {
         this.token = obj.token;
         this.isOur = obj.isOur;
         this.blockNumber = obj.blockNumber;
+        this.timestamp = obj.timestamp;
     }
 }
 exports.MerchantTransaction = MerchantTransaction;
@@ -52,12 +56,13 @@ exports.MerchantTransaction = MerchantTransaction;
 class TransactionBSON {
     id;
     projectId;
-    userId;
+    walletId;
     token;
     value;
     usd;
     txid;
     chain;
+    timestamp;
     constructor(obj) {
         this.id = obj.id;
         this.projectId = obj.projectId;
@@ -65,11 +70,12 @@ class TransactionBSON {
         this.usd = obj.usd;
         this.txid = obj.txid;
         this.chain = obj.chain;
-        if (typeof obj.userId === "bigint") {
-            this.userId = new bson_1.Decimal128(obj.userId.toString());
+        this.timestamp = obj.timestamp;
+        if (typeof obj.walletId === "bigint") {
+            this.walletId = new bson_1.Decimal128(obj.walletId.toString());
         }
         else
-            this.userId = obj.userId;
+            this.walletId = obj.walletId;
         this.value = obj.value;
     }
 }
@@ -77,16 +83,16 @@ exports.TransactionBSON = TransactionBSON;
 //То что main отправляет апишке через кафку
 class WalletBSON {
     projectId;
-    userId;
+    walletId;
     address;
     constructor(obj) {
         this.projectId = obj.projectId;
         this.address = obj.address;
-        if (typeof obj.userId === "bigint" || typeof obj.userId === "string") {
-            this.userId = new bson_1.Decimal128(obj.userId.toString());
+        if (typeof obj.walletId === "bigint" || typeof obj.walletId === "string") {
+            this.walletId = new bson_1.Decimal128(obj.walletId.toString());
         }
         else
-            this.userId = obj.userId;
+            this.walletId = obj.walletId;
     }
 }
 exports.WalletBSON = WalletBSON;

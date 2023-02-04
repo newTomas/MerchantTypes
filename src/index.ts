@@ -9,28 +9,30 @@ export type Log = LogOrig & {
 //То что получает юзер
 export class Transaction {
 	id: number;
-	userId: string;
+	walletId: string;
 	token: string;
 	value: string;
 	usd: number;
 	txid: string;
 	chain: number;
+	timestamp: number;
 
 	constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & { token: string, chain: number }) & { [key: string]: any }) {
 		this.id = obj.id;
-		this.userId = obj.userId.toString();
+		this.walletId = obj.walletId.toString();
 		this.token = obj.token;
 		this.value = obj.value.toString();
 		this.usd = obj.usd;
 		this.txid = obj.txid;
 		this.chain = obj.chain;
+		this.timestamp = obj.timestamp;
 	}
 }
 
 //То что эмитит платежка (перед отправкой на апишку)
 export class MerchantTransaction {
 	id: number;
-	userId: bigint;
+	walletId: bigint;
 	usd: number;
 	txid: string;
 	value: string;
@@ -39,11 +41,12 @@ export class MerchantTransaction {
 	projectId: number;
 	isOur: boolean;
 	blockNumber: number;
+	timestamp: number;
 
 	constructor(obj: MerchantTransaction & { [key: string]: any }) {
 		this.id = obj.id;
 		this.projectId = obj.projectId;
-		this.userId = obj.userId;
+		this.walletId = obj.walletId;
 		this.usd = obj.usd;
 		this.txid = obj.txid;
 		this.value = obj.value;
@@ -51,6 +54,7 @@ export class MerchantTransaction {
 		this.token = obj.token;
 		this.isOur = obj.isOur;
 		this.blockNumber = obj.blockNumber;
+		this.timestamp = obj.timestamp;
 	}
 }
 
@@ -58,12 +62,13 @@ export class MerchantTransaction {
 export class TransactionBSON {
 	id: number;
 	projectId: number;
-	userId: Decimal128;
+	walletId: Decimal128;
 	token: string;
 	value: string;
 	usd: number;
 	txid: string;
 	chain: number;
+	timestamp: number;
 
 	constructor(obj: (TransactionBSON | (MerchantTransaction & { chain: number })) & { [key: string]: any }) {
 		this.id = obj.id;
@@ -72,11 +77,12 @@ export class TransactionBSON {
 		this.usd = obj.usd;
 		this.txid = obj.txid;
 		this.chain = obj.chain;
+		this.timestamp = obj.timestamp;
 
-		if (typeof obj.userId === "bigint") {
-			this.userId = new Decimal128(obj.userId.toString());
+		if (typeof obj.walletId === "bigint") {
+			this.walletId = new Decimal128(obj.walletId.toString());
 		}
-		else this.userId = obj.userId;
+		else this.walletId = obj.walletId;
 
 		this.value = obj.value;
 	}
@@ -85,16 +91,16 @@ export class TransactionBSON {
 //То что main отправляет апишке через кафку
 export class WalletBSON {
 	projectId: number;
-	userId: Decimal128;
+	walletId: Decimal128;
 	address: string;
 
-	constructor(obj: { userId: string | bigint | Decimal128, projectId: number, address: string } & { [key: string]: any }) {
+	constructor(obj: { walletId: string | bigint | Decimal128, projectId: number, address: string } & { [key: string]: any }) {
 		this.projectId = obj.projectId;
 		this.address = obj.address;
 
-		if (typeof obj.userId === "bigint" || typeof obj.userId === "string") {
-			this.userId = new Decimal128(obj.userId.toString());
+		if (typeof obj.walletId === "bigint" || typeof obj.walletId === "string") {
+			this.walletId = new Decimal128(obj.walletId.toString());
 		}
-		else this.userId = obj.userId;
+		else this.walletId = obj.walletId;
 	}
 }

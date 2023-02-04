@@ -6,12 +6,13 @@ export type Log = LogOrig & {
 };
 export declare class Transaction {
     id: number;
-    userId: string;
+    walletId: string;
     token: string;
     value: string;
     usd: number;
     txid: string;
     chain: number;
+    timestamp: number;
     constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & {
         token: string;
         chain: number;
@@ -21,7 +22,7 @@ export declare class Transaction {
 }
 export declare class MerchantTransaction {
     id: number;
-    userId: bigint;
+    walletId: bigint;
     usd: number;
     txid: string;
     value: string;
@@ -30,6 +31,7 @@ export declare class MerchantTransaction {
     projectId: number;
     isOur: boolean;
     blockNumber: number;
+    timestamp: number;
     constructor(obj: MerchantTransaction & {
         [key: string]: any;
     });
@@ -37,12 +39,13 @@ export declare class MerchantTransaction {
 export declare class TransactionBSON {
     id: number;
     projectId: number;
-    userId: Decimal128;
+    walletId: Decimal128;
     token: string;
     value: string;
     usd: number;
     txid: string;
     chain: number;
+    timestamp: number;
     constructor(obj: (TransactionBSON | (MerchantTransaction & {
         chain: number;
     })) & {
@@ -51,10 +54,10 @@ export declare class TransactionBSON {
 }
 export declare class WalletBSON {
     projectId: number;
-    userId: Decimal128;
+    walletId: Decimal128;
     address: string;
     constructor(obj: {
-        userId: string | bigint | Decimal128;
+        walletId: string | bigint | Decimal128;
         projectId: number;
         address: string;
     } & {
