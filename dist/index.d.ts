@@ -12,7 +12,7 @@ export declare class Transaction {
     usd: number;
     txid: string;
     chain: number;
-    timestamp: number;
+    timestamp: Date;
     constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & {
         token: string;
         chain: number;
@@ -31,7 +31,7 @@ export declare class MerchantTransaction {
     projectId: number;
     isOur: boolean;
     blockNumber: number;
-    timestamp: number;
+    timestamp: Date;
     constructor(obj: MerchantTransaction & {
         [key: string]: any;
     });
@@ -45,7 +45,7 @@ export declare class TransactionBSON {
     usd: number;
     txid: string;
     chain: number;
-    timestamp: number;
+    timestamp: Date;
     constructor(obj: (TransactionBSON | (MerchantTransaction & {
         chain: number;
     })) & {

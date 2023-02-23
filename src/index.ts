@@ -15,7 +15,7 @@ export class Transaction {
 	usd: number;
 	txid: string;
 	chain: number;
-	timestamp: number;
+	timestamp: Date;
 
 	constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & { token: string, chain: number }) & { [key: string]: any }) {
 		this.id = obj.id;
@@ -41,7 +41,7 @@ export class MerchantTransaction {
 	projectId: number;
 	isOur: boolean;
 	blockNumber: number;
-	timestamp: number;
+	timestamp: Date;
 
 	constructor(obj: MerchantTransaction & { [key: string]: any }) {
 		this.id = obj.id;
@@ -68,7 +68,7 @@ export class TransactionBSON {
 	usd: number;
 	txid: string;
 	chain: number;
-	timestamp: number;
+	timestamp: Date;
 
 	constructor(obj: (TransactionBSON | (MerchantTransaction & { chain: number })) & { [key: string]: any }) {
 		this.id = obj.id;
