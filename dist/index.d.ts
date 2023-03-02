@@ -29,7 +29,6 @@ export declare class MerchantTransaction {
     tokenId: number;
     token: string;
     projectId: number;
-    isOur: boolean;
     blockNumber: number;
     timestamp: number;
     constructor(obj: MerchantTransaction & {

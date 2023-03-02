@@ -34,7 +34,6 @@ class MerchantTransaction {
     tokenId;
     token;
     projectId;
-    isOur;
     blockNumber;
     timestamp;
     constructor(obj) {
@@ -46,7 +45,6 @@ class MerchantTransaction {
         this.value = obj.value;
         this.tokenId = obj.tokenId;
         this.token = obj.token;
-        this.isOur = obj.isOur;
         this.blockNumber = obj.blockNumber;
         this.timestamp = obj.timestamp;
     }
