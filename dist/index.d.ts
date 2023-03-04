@@ -23,6 +23,7 @@ export declare class Transaction {
 export declare class MerchantTransaction {
     id: number;
     walletId: bigint;
+    walletUserId: number | null;
     usd: number;
     txid: string;
     value: string;

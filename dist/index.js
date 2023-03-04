@@ -28,6 +28,7 @@ exports.Transaction = Transaction;
 class MerchantTransaction {
     id;
     walletId;
+    walletUserId;
     usd;
     txid;
     value;
@@ -40,6 +41,7 @@ class MerchantTransaction {
         this.id = obj.id;
         this.projectId = obj.projectId;
         this.walletId = obj.walletId;
+        this.walletUserId = obj.walletUserId;
         this.usd = obj.usd;
         this.txid = obj.txid;
         this.value = obj.value;

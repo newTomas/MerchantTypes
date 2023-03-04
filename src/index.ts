@@ -33,6 +33,7 @@ export class Transaction {
 export class MerchantTransaction {
 	id: number;
 	walletId: bigint;
+	walletUserId: number | null;
 	usd: number;
 	txid: string;
 	value: string;
@@ -46,6 +47,7 @@ export class MerchantTransaction {
 		this.id = obj.id;
 		this.projectId = obj.projectId;
 		this.walletId = obj.walletId;
+		this.walletUserId = obj.walletUserId;
 		this.usd = obj.usd;
 		this.txid = obj.txid;
 		this.value = obj.value;
