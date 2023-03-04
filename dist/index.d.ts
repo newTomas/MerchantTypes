@@ -40,6 +40,7 @@ export declare class TransactionBSON {
     id: number;
     projectId: number;
     walletId: Decimal128;
+    walletUserId: number | null;
     token: string;
     value: string;
     usd: number;

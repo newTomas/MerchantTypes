@@ -63,6 +63,7 @@ export class TransactionBSON {
 	id: number;
 	projectId: number;
 	walletId: Decimal128;
+	walletUserId: number | null;
 	token: string;
 	value: string;
 	usd: number;
@@ -83,6 +84,7 @@ export class TransactionBSON {
 			this.walletId = new Decimal128(obj.walletId.toString());
 		}
 		else this.walletId = obj.walletId;
+		this.walletUserId = obj.walletUserId;
 
 		this.value = obj.value;
 	}

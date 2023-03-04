@@ -57,6 +57,7 @@ class TransactionBSON {
     id;
     projectId;
     walletId;
+    walletUserId;
     token;
     value;
     usd;
@@ -76,6 +77,7 @@ class TransactionBSON {
         }
         else
             this.walletId = obj.walletId;
+        this.walletUserId = obj.walletUserId;
         this.value = obj.value;
     }
 }
