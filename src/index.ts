@@ -10,6 +10,7 @@ export type Log = LogOrig & {
 export class Transaction {
 	id: number;
 	walletId: string;
+	walletSubId: number;
 	token: string;
 	value: string;
 	usd: number;
@@ -20,6 +21,7 @@ export class Transaction {
 	constructor(obj: (Transaction | TransactionBSON | MerchantTransaction & { token: string, chain: number }) & { [key: string]: any }) {
 		this.id = obj.id;
 		this.walletId = obj.walletId.toString();
+		this.walletSubId = obj.walletSubId;
 		this.token = obj.token;
 		this.value = obj.value.toString();
 		this.usd = obj.usd;
@@ -33,6 +35,7 @@ export class Transaction {
 export class MerchantTransaction {
 	id: number;
 	walletId: bigint;
+	walletSubId: number;
 	walletUserId: number | null;
 	usd: number;
 	txid: string;
@@ -47,6 +50,7 @@ export class MerchantTransaction {
 		this.id = obj.id;
 		this.projectId = obj.projectId;
 		this.walletId = obj.walletId;
+		this.walletSubId = obj.walletSubId;
 		this.walletUserId = obj.walletUserId;
 		this.usd = obj.usd;
 		this.txid = obj.txid;
@@ -63,6 +67,7 @@ export class TransactionBSON {
 	id: number;
 	projectId: number;
 	walletId: Decimal128;
+	walletSubId: number;
 	walletUserId: number | null;
 	token: string;
 	value: string;
@@ -84,6 +89,7 @@ export class TransactionBSON {
 			this.walletId = new Decimal128(obj.walletId.toString());
 		}
 		else this.walletId = obj.walletId;
+		this.walletSubId = obj.walletSubId;
 		this.walletUserId = obj.walletUserId;
 
 		this.value = obj.value;
@@ -94,9 +100,10 @@ export class TransactionBSON {
 export class WalletBSON {
 	projectId: number;
 	id: Decimal128;
+	subId: number;
 	address: string;
 
-	constructor(obj: { id: string | bigint | Decimal128, projectId: number, address: string } & { [key: string]: any }) {
+	constructor(obj: { id: string | bigint | Decimal128, subId: number, projectId: number, address: string } & { [key: string]: any }) {
 		this.projectId = obj.projectId;
 		this.address = obj.address;
 
@@ -104,5 +111,7 @@ export class WalletBSON {
 			this.id = new Decimal128(obj.id.toString());
 		}
 		else this.id = obj.id;
+
+		this.subId = obj.subId;
 	}
 }

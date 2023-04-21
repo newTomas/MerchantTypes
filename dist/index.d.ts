@@ -7,6 +7,7 @@ export type Log = LogOrig & {
 export declare class Transaction {
     id: number;
     walletId: string;
+    walletSubId: number;
     token: string;
     value: string;
     usd: number;
@@ -23,6 +24,7 @@ export declare class Transaction {
 export declare class MerchantTransaction {
     id: number;
     walletId: bigint;
+    walletSubId: number;
     walletUserId: number | null;
     usd: number;
     txid: string;
@@ -40,6 +42,7 @@ export declare class TransactionBSON {
     id: number;
     projectId: number;
     walletId: Decimal128;
+    walletSubId: number;
     walletUserId: number | null;
     token: string;
     value: string;
@@ -56,9 +59,11 @@ export declare class TransactionBSON {
 export declare class WalletBSON {
     projectId: number;
     id: Decimal128;
+    subId: number;
     address: string;
     constructor(obj: {
         id: string | bigint | Decimal128;
+        subId: number;
         projectId: number;
         address: string;
     } & {

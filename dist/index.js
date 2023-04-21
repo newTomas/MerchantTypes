@@ -6,6 +6,7 @@ const bson_1 = require("bson");
 class Transaction {
     id;
     walletId;
+    walletSubId;
     token;
     value;
     usd;
@@ -15,6 +16,7 @@ class Transaction {
     constructor(obj) {
         this.id = obj.id;
         this.walletId = obj.walletId.toString();
+        this.walletSubId = obj.walletSubId;
         this.token = obj.token;
         this.value = obj.value.toString();
         this.usd = obj.usd;
@@ -28,6 +30,7 @@ exports.Transaction = Transaction;
 class MerchantTransaction {
     id;
     walletId;
+    walletSubId;
     walletUserId;
     usd;
     txid;
@@ -41,6 +44,7 @@ class MerchantTransaction {
         this.id = obj.id;
         this.projectId = obj.projectId;
         this.walletId = obj.walletId;
+        this.walletSubId = obj.walletSubId;
         this.walletUserId = obj.walletUserId;
         this.usd = obj.usd;
         this.txid = obj.txid;
@@ -57,6 +61,7 @@ class TransactionBSON {
     id;
     projectId;
     walletId;
+    walletSubId;
     walletUserId;
     token;
     value;
@@ -77,6 +82,7 @@ class TransactionBSON {
         }
         else
             this.walletId = obj.walletId;
+        this.walletSubId = obj.walletSubId;
         this.walletUserId = obj.walletUserId;
         this.value = obj.value;
     }
@@ -86,6 +92,7 @@ exports.TransactionBSON = TransactionBSON;
 class WalletBSON {
     projectId;
     id;
+    subId;
     address;
     constructor(obj) {
         this.projectId = obj.projectId;
@@ -95,6 +102,7 @@ class WalletBSON {
         }
         else
             this.id = obj.id;
+        this.subId = obj.subId;
     }
 }
 exports.WalletBSON = WalletBSON;
