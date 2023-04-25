@@ -8,6 +8,7 @@ export declare class Transaction {
     id: number;
     walletId: string;
     walletSubId: number;
+    userId?: string;
     token: string;
     value: string;
     usd: number;

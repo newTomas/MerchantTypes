@@ -11,6 +11,7 @@ export class Transaction {
 	id: number;
 	walletId: string;
 	walletSubId: number;
+	userId?: string;
 	token: string;
 	value: string;
 	usd: number;
@@ -22,6 +23,7 @@ export class Transaction {
 		this.id = obj.id;
 		this.walletId = obj.walletId.toString();
 		this.walletSubId = obj.walletSubId;
+		this.userId = obj.userId;
 		this.token = obj.token;
 		this.value = obj.value.toString();
 		this.usd = obj.usd;
